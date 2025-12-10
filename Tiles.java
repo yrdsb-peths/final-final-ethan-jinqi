@@ -15,7 +15,14 @@ public class Tiles extends Actor
     int num = Greenfoot.getRandomNumber(9);
     
     //GreenfootImage tiles = new GreenfootImage("tile_9.jpg");
-    GreenfootImage[] numTiles = new GreenfootImage[10];
+    MouseInfo mouse = Greenfoot.getMouseInfo();
+    int mouseX = 0;
+    int mouseY = 0; 
+    boolean holdRight = false;
+    boolean holdLeft = false;
+    boolean flag = false;
+    boolean uncovered = false;
+    GreenfootImage[] numTiles = new GreenfootImage[12];
     //SimpleTimer animationTimer = new SimpleTimer();
     public Tiles(){
         //setImage (tiles);
@@ -30,15 +37,41 @@ public class Tiles extends Actor
         setImage (numTiles[9]);
     }
     
-     
+    
+    
     public void act()
     {
         // Add your action code here.
+        mouse = Greenfoot.getMouseInfo();
+        if (mouse!= null) {
+            mouseX = mouse.getX();
+            mouseY = mouse.getY();
+        
+        }
         
         //MouseInfo mouse = Greenfoot.getMouseInfo();
-        if (Greenfoot.isKeyDown("left")) {
+        
+        
+        if(mouseX >= getX() - 20 && mouseX <= getX() + 20 &&
+            mouseY >= getY() - 20 && mouseY <= getY() + 20) {
+            if (Greenfoot.isKeyDown("right") && !uncovered){
+                if(!holdRight){
+                    flag = !flag;
+                }
+                holdRight = true;
+                if(flag){
+                    setImage(numTiles[10]);
+                }else{
+                    setImage (numTiles[9]);
+                }
+            } else{
+                holdRight = false;
+                if (Greenfoot.isKeyDown("left") && !flag){
+                uncovered = true;
+                setImage(numTiles[num]);
+            }
+            }
             
-            setImage(numTiles[num]);
         }
         
         animateTiles();
