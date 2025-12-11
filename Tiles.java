@@ -12,7 +12,7 @@ public class Tiles extends Actor
      * Act - do whatever the Tiles wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    int num = Greenfoot.getRandomNumber(9);
+    int num = 0;
     
     //GreenfootImage tiles = new GreenfootImage("tile_9.jpg");
     MouseInfo mouse = Greenfoot.getMouseInfo();
@@ -74,24 +74,10 @@ public class Tiles extends Actor
             
         }
         
-        animateTiles();
         
     }
     
-    public void animateTiles(){
-        
-        /*
-        if (animationTimer.millisElapsed() < 100) {
-            return;
-        }
-        animationTimer.mark();
-        
-        
-        if(num < 9){
-            //move(1);
-            setImage(numTiles[num]);
-        
-        }
-        */
+    public void setNum(int number){
+        num = number;
     }
 }
