@@ -3,6 +3,7 @@ import greenfoot.*;
 public class MyWorld extends World {
     static int mineNum = 40;
     static int[][] bombs = new int[15][15];
+    Tiles[][] tiles = new Tiles[15][15];
     public MyWorld() {
         super(600, 600, 1);
         /*
@@ -27,11 +28,12 @@ public class MyWorld extends World {
         }
         
         //creates the tiles
-        Tiles[][] tiles = new Tiles[15][15];
+        
         for(int i = 0; i < 15; i++){
             for(int n = 0; n < 15; n++){
                 tiles[i][n] = new Tiles();
                 tiles[i][n].setNum(createTiles(i, n));
+                bombs[i][n] = createTiles(i, n);
                 tiles[i][n].location(i, n);
                 addObject (tiles[i][n], 20 + 40 * n, 20 + 40 * i);
             }
@@ -59,5 +61,15 @@ public class MyWorld extends World {
             }
         }
         return count;
+    }
+    public void callSurround(int row, int coll){
+        for(int i = -1; i <= 1; i++){
+            for(int n = -1; n <= 1; n++){
+                if(row + n >= 0 && row + n < 15 &&
+                coll + i >= 0 && coll + i < 15){
+                    tiles[row + n][coll + i].checkEmpty();
+                }
+            }
+        }
     }
 }

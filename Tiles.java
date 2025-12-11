@@ -71,6 +71,11 @@ public class Tiles extends Actor
                 if (Greenfoot.isKeyDown("left") && !flag){
                 uncovered = true;
                 setImage(numTiles[num]);
+                if(num == 0){
+                    MyWorld world = (MyWorld) getWorld();
+
+                    world.callSurround(x, y);
+                }
             }
             }
             
@@ -87,4 +92,17 @@ public class Tiles extends Actor
         x = row;
         y = coll;
     }
+    
+    public void checkEmpty(){
+        if(!uncovered && num == 0){
+            uncovered = true;
+            MyWorld world = (MyWorld) getWorld();
+            world.callSurround(x, y);
+        } else{
+            uncovered = true;
+        }
+        
+        setImage(numTiles[num]);
+    }
+    
 }
