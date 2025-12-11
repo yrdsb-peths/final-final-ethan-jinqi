@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class MyWorld extends World {
-    
+    static int mineNum = 40;
     static int[][] bombs = new int[15][15];
     public MyWorld() {
         super(600, 600, 1);
@@ -11,7 +11,7 @@ public class MyWorld extends World {
             }
         }
         
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < mineNum; i++){
             int coll = Greenfoot.getRandomNumber(15);
             int row = Greenfoot.getRandomNumber(15);
             while(bombs[row][coll] == 11){
