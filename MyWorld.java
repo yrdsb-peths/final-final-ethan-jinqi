@@ -5,12 +5,17 @@ public class MyWorld extends World {
     static int[][] bombs = new int[15][15];
     public MyWorld() {
         super(600, 600, 1);
+        /*
+         * creats bombs at random location
+         */
         for(int i = 0; i < 15; i++){
             for(int n = 0; n < 15; n++){
                 bombs[i][n] = 0;
             }
         }
-        
+        /*
+         * moves bomb if invalid spot
+         */
         for(int i = 0; i < mineNum; i++){
             int coll = Greenfoot.getRandomNumber(15);
             int row = Greenfoot.getRandomNumber(15);
@@ -21,16 +26,22 @@ public class MyWorld extends World {
             bombs[row][coll] = 11;
         }
         
+        //creates the tiles
         Tiles[][] tiles = new Tiles[15][15];
         for(int i = 0; i < 15; i++){
             for(int n = 0; n < 15; n++){
                 tiles[i][n] = new Tiles();
                 tiles[i][n].setNum(createTiles(i, n));
+                tiles[i][n].location(i, n,);
                 addObject (tiles[i][n], 20 + 40 * n, 20 + 40 * i);
             }
         }
         
     }
+    
+    /*
+     * returns the amount of bombs surrounding
+     */
     
     public static int createTiles(int row, int coll){
         int count = 0;

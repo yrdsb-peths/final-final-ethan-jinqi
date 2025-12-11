@@ -18,6 +18,8 @@ public class Tiles extends Actor
     MouseInfo mouse = Greenfoot.getMouseInfo();
     int mouseX = 0;
     int mouseY = 0; 
+    int x = 0;
+    int y = 0;
     boolean holdRight = false;
     boolean holdLeft = false;
     boolean flag = false;
@@ -79,5 +81,10 @@ public class Tiles extends Actor
     
     public void setNum(int number){
         num = number;
+    }
+    
+    public void location(int row, int coll){
+        x = row;
+        y = coll;
     }
 }
