@@ -16,8 +16,10 @@ public class Tiles extends Actor
     
     //GreenfootImage tiles = new GreenfootImage("tile_9.jpg");
     MouseInfo mouse = Greenfoot.getMouseInfo();
-    int mouseX = 0;
-    int mouseY = 0; 
+    int mouseX = -1;
+    int mouseY = -1; 
+    int x = 0;
+    int y = 0;
     boolean holdRight = false;
     boolean holdLeft = false;
     boolean flag = false;
@@ -52,8 +54,8 @@ public class Tiles extends Actor
         //MouseInfo mouse = Greenfoot.getMouseInfo();
         
         
-        if(mouseX >= getX() - 20 && mouseX <= getX() + 20 &&
-            mouseY >= getY() - 20 && mouseY <= getY() + 20) {
+        if(mouseX >= getX() - 20 && mouseX <= getX() + 20 && mouseX > -1 &&
+            mouseY >= getY() - 20 && mouseY <= getY() + 20 && mouseY > -1) {
             if (Greenfoot.isKeyDown("right") && !uncovered){
                 if(!holdRight){
                     flag = !flag;
@@ -69,6 +71,11 @@ public class Tiles extends Actor
                 if (Greenfoot.isKeyDown("left") && !flag){
                 uncovered = true;
                 setImage(numTiles[num]);
+                if(num == 0){
+                    MyWorld world = (MyWorld) getWorld();
+
+                    world.callSurround(x, y);
+                }
             }
             }
             
@@ -80,4 +87,22 @@ public class Tiles extends Actor
     public void setNum(int number){
         num = number;
     }
+    
+    public void location(int row, int coll){
+        x = row;
+        y = coll;
+    }
+    
+    public void checkEmpty(){
+        if(!uncovered && num == 0){
+            uncovered = true;
+            MyWorld world = (MyWorld) getWorld();
+            world.callSurround(x, y);
+        } else{
+            uncovered = true;
+        }
+        
+        setImage(numTiles[num]);
+    }
+    
 }
