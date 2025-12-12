@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class MyWorld extends World {
-    static int mineNum = 40;
+    static int mineNum = 1;
     static int[][] bombs = new int[15][15];
     Tiles[][] tiles = new Tiles[15][15];
     public MyWorld() {

@@ -16,8 +16,8 @@ public class Tiles extends Actor
     
     //GreenfootImage tiles = new GreenfootImage("tile_9.jpg");
     MouseInfo mouse = Greenfoot.getMouseInfo();
-    int mouseX = 0;
-    int mouseY = 0; 
+    int mouseX = -1;
+    int mouseY = -1; 
     int x = 0;
     int y = 0;
     boolean holdRight = false;
@@ -54,8 +54,8 @@ public class Tiles extends Actor
         //MouseInfo mouse = Greenfoot.getMouseInfo();
         
         
-        if(mouseX >= getX() - 20 && mouseX <= getX() + 20 &&
-            mouseY >= getY() - 20 && mouseY <= getY() + 20) {
+        if(mouseX >= getX() - 20 && mouseX <= getX() + 20 && mouseX > -1 &&
+            mouseY >= getY() - 20 && mouseY <= getY() + 20 && mouseY > -1) {
             if (Greenfoot.isKeyDown("right") && !uncovered){
                 if(!holdRight){
                     flag = !flag;
