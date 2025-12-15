@@ -20,6 +20,7 @@ public class Tiles extends Actor
     int mouseY = -1; 
     int x = 0;
     int y = 0;
+    boolean firstClick = true;
     boolean holdRight = false;
     boolean holdLeft = false;
     boolean flag = false;
@@ -56,7 +57,9 @@ public class Tiles extends Actor
         
         if(mouseX >= getX() - 20 && mouseX <= getX() + 20 && mouseX > -1 &&
             mouseY >= getY() - 20 && mouseY <= getY() + 20 && mouseY > -1) {
+            
             if (Greenfoot.isKeyDown("right") && !uncovered){
+                 
                 if(!holdRight){
                     flag = !flag;
                 }
@@ -66,17 +69,24 @@ public class Tiles extends Actor
                 }else{
                     setImage (numTiles[9]);
                 }
+            
             } else{
                 holdRight = false;
                 if (Greenfoot.isKeyDown("left") && !flag){
-                uncovered = true;
-                setImage(numTiles[num]);
-                if(num == 0){
+                    
+                    if(firstClick){
                     MyWorld world = (MyWorld) getWorld();
-
-                    world.callSurround(x, y);
+                    world.createBombs(x, y);
+                    }else{
+                        uncovered = true;
+                        setImage(numTiles[num]);
+                        if(num == 0){
+                            MyWorld world = (MyWorld) getWorld();
+    
+                            world.callSurround(x, y);
+                        }
+                    }
                 }
-            }
             }
             
         }
@@ -86,6 +96,7 @@ public class Tiles extends Actor
     
     public void setNum(int number){
         num = number;
+        firstClick = false;
     }
     
     public void location(int row, int coll){

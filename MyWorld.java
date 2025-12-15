@@ -1,39 +1,25 @@
 import greenfoot.*;
 
 public class MyWorld extends World {
-    static int mineNum = 50;
-    static int[][] bombs = new int[15][15];
+    int mineNum = 50;
+    int[][] bombs = new int[15][15];
     Tiles[][] tiles = new Tiles[15][15];
     public MyWorld() {
         super(600, 600, 1);
-        /*
-         * creats bombs at random location
-         */
+        
         for(int i = 0; i < 15; i++){
             for(int n = 0; n < 15; n++){
+                
                 bombs[i][n] = 0;
             }
         }
-        /*
-         * moves bomb if invalid spot
-         */
-        for(int i = 0; i < mineNum; i++){
-            int coll = Greenfoot.getRandomNumber(15);
-            int row = Greenfoot.getRandomNumber(15);
-            while(bombs[row][coll] == 11){
-                coll = Greenfoot.getRandomNumber(15);
-                row = Greenfoot.getRandomNumber(15);
-            }
-            bombs[row][coll] = 11;
-        }
-        
         //creates the tiles
         
         for(int i = 0; i < 15; i++){
             for(int n = 0; n < 15; n++){
                 tiles[i][n] = new Tiles();
-                tiles[i][n].setNum(createTiles(i, n));
-                bombs[i][n] = createTiles(i, n);
+                //tiles[i][n].setNum(createTiles(i, n));
+                //bombs[i][n] = createTiles(i, n);
                 tiles[i][n].location(i, n);
                 addObject (tiles[i][n], 20 + 40 * n, 20 + 40 * i);
             }
@@ -42,10 +28,45 @@ public class MyWorld extends World {
     }
     
     /*
+     * creats bombs at random location
+     */
+    public void createBombs(int row, int coll){
+        
+        /*
+         * moves bomb if invalid spot
+         */
+        for(int i = 0; i < mineNum; i++){
+            int c = Greenfoot.getRandomNumber(15);
+            int r = Greenfoot.getRandomNumber(15);
+            while(bombs[r][c] == 11 || moveBombs(row, coll, r, c)){
+                c = Greenfoot.getRandomNumber(15);
+                r = Greenfoot.getRandomNumber(15);
+                
+            }
+            bombs[r][c] = 11;
+        }
+        
+        for(int i = 0; i < 15; i++){
+            for(int n = 0; n < 15; n++){
+                tiles[i][n].setNum(createTiles(i, n));
+                bombs[i][n] = createTiles(i, n);
+            }
+        }
+        
+    }
+    private boolean moveBombs(int row, int coll, int r, int c){
+        if (row - 1 <= r && row + 1 >= r &&
+            coll - 1 <=c && coll + 1 >= c){
+            return true;
+        }
+        return false;
+    }
+    
+    /*
      * returns the amount of bombs surrounding
      */
     
-    public static int createTiles(int row, int coll){
+    public int createTiles(int row, int coll){
         int count = 0;
         if(bombs[row][coll] == 11){
             return 11;
