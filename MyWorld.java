@@ -4,6 +4,7 @@ public class MyWorld extends World {
     int mineNum = 50;
     int[][] bombs = new int[15][15];
     Tiles[][] tiles = new Tiles[15][15];
+    boolean gameOver = false;
     public MyWorld() {
         super(600, 600, 1);
         
@@ -26,7 +27,19 @@ public class MyWorld extends World {
         }
         
     }
-    
+    public void loseGame()
+    {
+        for(int i = 0; i < 15; i++)
+        {
+            for(int n = 0; n < 15; n++)
+            {
+                if(bombs[i][n] == 11)
+                {
+                    tiles[i][n].showBomb();    
+                }
+            }    
+        }
+    }
     /*
      * creats bombs at random location
      */
