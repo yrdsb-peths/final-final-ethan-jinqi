@@ -1,27 +1,30 @@
 import greenfoot.*;
 
 public class MyWorld extends World {
-    int mineNum = 50;
-    int[][] bombs = new int[15][15];
-    Tiles[][] tiles = new Tiles[15][15];
+    int mineNum = 90;
+    private final int tileSize = 40;
+    private final int gridRow = 15;
+    private final int gridColl = 20;
+    int[][] bombs = new int[gridRow][gridColl];
+    Tiles[][] tiles = new Tiles[gridRow][gridColl];
     public MyWorld() {
-        super(600, 600, 1);
+        super(1000, 600, 1);
         
-        for(int i = 0; i < 15; i++){
-            for(int n = 0; n < 15; n++){
+        for(int i = 0; i < gridRow; i++){
+            for(int n = 0; n < gridColl; n++){
                 
                 bombs[i][n] = 0;
             }
         }
         //creates the tiles
         
-        for(int i = 0; i < 15; i++){
-            for(int n = 0; n < 15; n++){
+        for(int i = 0; i < gridRow; i++){
+            for(int n = 0; n < gridColl; n++){
                 tiles[i][n] = new Tiles();
                 //tiles[i][n].setNum(createTiles(i, n));
                 //bombs[i][n] = createTiles(i, n);
                 tiles[i][n].location(i, n);
-                addObject (tiles[i][n], 20 + 40 * n, 20 + 40 * i);
+                addObject (tiles[i][n], tileSize / 2 + tileSize * n, tileSize / 2 + tileSize * i);
             }
         }
         
@@ -36,18 +39,18 @@ public class MyWorld extends World {
          * moves bomb if invalid spot
          */
         for(int i = 0; i < mineNum; i++){
-            int c = Greenfoot.getRandomNumber(15);
-            int r = Greenfoot.getRandomNumber(15);
+            int c = Greenfoot.getRandomNumber(gridColl);
+            int r = Greenfoot.getRandomNumber(gridRow);
             while(bombs[r][c] == 11 || moveBombs(row, coll, r, c)){
-                c = Greenfoot.getRandomNumber(15);
-                r = Greenfoot.getRandomNumber(15);
+                c = Greenfoot.getRandomNumber(gridColl);
+                r = Greenfoot.getRandomNumber(gridRow);
                 
             }
             bombs[r][c] = 11;
         }
         
-        for(int i = 0; i < 15; i++){
-            for(int n = 0; n < 15; n++){
+        for(int i = 0; i < gridRow; i++){
+            for(int n = 0; n < gridColl; n++){
                 tiles[i][n].setNum(createTiles(i, n));
                 bombs[i][n] = createTiles(i, n);
             }
@@ -73,8 +76,8 @@ public class MyWorld extends World {
         }
         for(int i = -1; i <= 1; i++){
             for(int n = -1; n <= 1; n++){
-                if(row + n >= 0 && row + n < 15 &&
-                coll + i >= 0 && coll + i < 15){
+                if(row + n >= 0 && row + n < gridRow &&
+                coll + i >= 0 && coll + i < gridColl){
                     if (bombs[row + n][coll + i] == 11){
                         count++;
                     }
@@ -86,11 +89,14 @@ public class MyWorld extends World {
     public void callSurround(int row, int coll){
         for(int i = -1; i <= 1; i++){
             for(int n = -1; n <= 1; n++){
-                if(row + n >= 0 && row + n < 15 &&
-                coll + i >= 0 && coll + i < 15){
+                if(row + n >= 0 && row + n < gridRow &&
+                coll + i >= 0 && coll + i < gridColl){
                     tiles[row + n][coll + i].checkEmpty();
                 }
             }
         }
+    }
+    public int tileSizeSend(){
+        return tileSize;
     }
 }

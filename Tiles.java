@@ -13,7 +13,7 @@ public class Tiles extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     int num = 0;
-    
+    int tileSize = 40;
     //GreenfootImage tiles = new GreenfootImage("tile_9.jpg");
     MouseInfo mouse = Greenfoot.getMouseInfo();
     int mouseX = -1;
@@ -32,7 +32,7 @@ public class Tiles extends Actor
         //tiles.scale(40, 40);
         for(int i = 0; i < numTiles.length; i++){
             numTiles[i] = new GreenfootImage("tile_" + i + ".jpg");
-            numTiles[i].scale(40, 40);
+            numTiles[i].scale(tileSize, tileSize);
         }
         
         //animationTimer.mark();
@@ -55,8 +55,8 @@ public class Tiles extends Actor
         //MouseInfo mouse = Greenfoot.getMouseInfo();
         
         
-        if(mouseX >= getX() - 20 && mouseX <= getX() + 20 && mouseX > -1 &&
-            mouseY >= getY() - 20 && mouseY <= getY() + 20 && mouseY > -1) {
+        if(mouseX >= getX() - tileSize / 2 && mouseX <= getX() + tileSize / 2 && mouseX > -1 &&
+            mouseY >= getY() - tileSize / 2 && mouseY <= getY() + tileSize / 2 && mouseY > -1) {
             
             if (Greenfoot.isKeyDown("right") && !uncovered){
                  
@@ -116,4 +116,8 @@ public class Tiles extends Actor
         setImage(numTiles[num]);
     }
     
+    /*private int getTileSize(){
+        MyWorld world = (MyWorld) getWorld();
+        return world.tileSizeSend();
+    }*/
 }
