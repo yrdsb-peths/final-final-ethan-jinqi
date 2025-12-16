@@ -4,7 +4,7 @@ public class MyWorld extends World {
     int mineNum = 50;
     private final int tileSize = 40;
     private final int gridRow = 15;
-    private final int gridColl = 15;
+    private final int gridColl = 25;
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
     boolean gameOver = false;
@@ -32,9 +32,9 @@ public class MyWorld extends World {
     }
     public void loseGame()
     {
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < gridRow; i++)
         {
-            for(int n = 0; n < 15; n++)
+            for(int n = 0; n < gridColl; n++)
             {
                 if(bombs[i][n] == 11)
                 {
