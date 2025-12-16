@@ -25,6 +25,7 @@ public class Tiles extends Actor
     boolean holdLeft = false;
     boolean flag = false;
     boolean uncovered = false;
+    boolean lost = false;
     GreenfootImage[] numTiles = new GreenfootImage[12];
     //SimpleTimer animationTimer = new SimpleTimer();
     public Tiles(){
@@ -45,6 +46,12 @@ public class Tiles extends Actor
     public void act()
     {
         // Add your action code here.
+        MyWorld world = (MyWorld) getWorld();
+        if (world.gameOver) 
+        {
+            return;    
+        }
+        
         mouse = Greenfoot.getMouseInfo();
         if (mouse!= null) {
             mouseX = mouse.getX();
@@ -53,6 +60,7 @@ public class Tiles extends Actor
         }
         
         //MouseInfo mouse = Greenfoot.getMouseInfo();
+        
         
         
         if(mouseX >= getX() - 20 && mouseX <= getX() + 20 && mouseX > -1 &&
@@ -75,10 +83,10 @@ public class Tiles extends Actor
                 if (Greenfoot.isKeyDown("left") && !flag){
                     
                     if(firstClick){
-                    MyWorld world = (MyWorld) getWorld();
+                    
                     world.createBombs(x, y);
                     }else{
-                    MyWorld world = (MyWorld) getWorld();
+                    
                     uncovered = true;
                     setImage(numTiles[num]);
                     
@@ -95,8 +103,6 @@ public class Tiles extends Actor
             }
             
         }
-        
-        
     }
     public void showBomb()
     {

@@ -39,6 +39,7 @@ public class MyWorld extends World {
                 }
             }    
         }
+        Greenfoot.stop();
     }
     /*
      * creats bombs at random location
