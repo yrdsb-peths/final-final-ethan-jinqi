@@ -31,14 +31,7 @@ public class Tiles extends Actor
     public Tiles(){
         //setImage (tiles);
         //tiles.scale(40, 40);
-        for(int i = 0; i < numTiles.length; i++){
-            numTiles[i] = new GreenfootImage("tile_" + i + ".jpg");
-            numTiles[i].scale(tileSize, tileSize);
-        }
         
-        //animationTimer.mark();
-        
-        setImage (numTiles[9]);
     }
     
     
@@ -135,8 +128,13 @@ public class Tiles extends Actor
         setImage(numTiles[num]);
     }
     
-    /*private int getTileSize(){
-        MyWorld world = (MyWorld) getWorld();
-        return world.tileSizeSend();
-    }*/
+    public void setTileSize(int size){
+        size = tileSize;
+        for(int i = 0; i < numTiles.length; i++){
+            numTiles[i] = new GreenfootImage("tile_" + i + ".jpg");
+            numTiles[i].scale(tileSize, tileSize);
+        }
+        
+        setImage (numTiles[9]);
+    }
 }
