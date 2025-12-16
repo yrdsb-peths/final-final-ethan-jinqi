@@ -78,13 +78,18 @@ public class Tiles extends Actor
                     MyWorld world = (MyWorld) getWorld();
                     world.createBombs(x, y);
                     }else{
-                        uncovered = true;
-                        setImage(numTiles[num]);
-                        if(num == 0){
-                            MyWorld world = (MyWorld) getWorld();
-    
-                            world.callSurround(x, y);
-                        }
+                    MyWorld world = (MyWorld) getWorld();
+                    uncovered = true;
+                    setImage(numTiles[num]);
+                    
+                    if (num == 11) {   // 💣 BOMB CLICKED
+                        world.loseGame();
+                        return;
+                    }
+                    
+                    if (num == 0) {
+                        world.callSurround(x, y);
+                    }
                     }
                 }
             }
@@ -93,7 +98,11 @@ public class Tiles extends Actor
         
         
     }
-    
+    public void showBomb()
+    {
+        uncovered = true;
+        setImage(numTiles[11]);
+    }
     public void setNum(int number){
         num = number;
         firstClick = false;

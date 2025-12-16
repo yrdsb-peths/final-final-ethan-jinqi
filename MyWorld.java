@@ -1,10 +1,10 @@
 import greenfoot.*;
 
 public class MyWorld extends World {
-    int mineNum = 90;
+    int mineNum = 50;
     private final int tileSize = 40;
     private final int gridRow = 15;
-    private final int gridColl = 20;
+    private final int gridColl = 15;
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
     public MyWorld() {
@@ -29,7 +29,19 @@ public class MyWorld extends World {
         }
         
     }
-    
+    public void loseGame()
+    {
+        for(int i = 0; i < 15; i++)
+        {
+            for(int n = 0; n < 15; n++)
+            {
+                if(bombs[i][n] == 11)
+                {
+                    tiles[i][n].showBomb();    
+                }
+            }    
+        }
+    }
     /*
      * creats bombs at random location
      */
