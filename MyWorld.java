@@ -21,7 +21,7 @@ public class MyWorld extends World {
         for(int i = 0; i < gridRow; i++){
             for(int n = 0; n < gridColl; n++){
                 tiles[i][n] = new Tiles();
-                //tiles[i][n].setNum(createTiles(i, n));
+                tiles[i][n].setTileSize(tileSize);
                 //bombs[i][n] = createTiles(i, n);
                 tiles[i][n].location(i, n);
                 addObject (tiles[i][n], tileSize / 2 + tileSize * n, tileSize / 2 + tileSize * i);
