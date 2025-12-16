@@ -13,7 +13,7 @@ public class Tiles extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     int num = 0;
-    int tileSize = 40;
+    int tileSize = 0;
     //GreenfootImage tiles = new GreenfootImage("tile_9.jpg");
     MouseInfo mouse = Greenfoot.getMouseInfo();
     int mouseX = -1;
@@ -119,7 +119,7 @@ public class Tiles extends Actor
     }
     
     public void setTileSize(int size){
-        size = tileSize;
+        tileSize = size;
         for(int i = 0; i < numTiles.length; i++){
             numTiles[i] = new GreenfootImage("tile_" + i + ".jpg");
             numTiles[i].scale(tileSize, tileSize);

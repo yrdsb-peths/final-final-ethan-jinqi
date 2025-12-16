@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class MyWorld extends World {
     int mineNum = 50;
-    private final int tileSize = 40;
+    private final int tileSize = 35;
     private final int gridRow = 15;
     private final int gridColl = 25;
     int[][] bombs = new int[gridRow][gridColl];
