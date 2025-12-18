@@ -8,6 +8,15 @@ public class MyWorld extends World {
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
     boolean gameOver = false;
+    private int time = 0;
+    public void act()
+    {
+        time++;
+        if(time % 60 == 0)
+        {
+            showText("Time: " + (time / 60), 520, 20);    
+        }
+    }
     public MyWorld() {
         super(1000, 600, 1);
         
@@ -78,7 +87,11 @@ public class MyWorld extends World {
         }
         return false;
     }
-    
+    public void gameOver()
+    {
+        Label gameOverLabel = new Label("Game Over", 100);
+        addObject(gameOverLabel,300,200);
+    }
     /*
      * returns the amount of bombs surrounding
      */

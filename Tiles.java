@@ -89,6 +89,7 @@ public class Tiles extends Actor
                     
                     if (num == 11) {   // 💣 BOMB CLICKED
                         world.loseGame();
+                        world.gameOver();
                         return;
                     }
                     
