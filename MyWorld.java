@@ -1,25 +1,34 @@
 import greenfoot.*;
 
 public class MyWorld extends World {
-    int mineNum = 99;
-    private final int tileSize = 30;
-    private final int gridRow = 16;
-    private final int gridColl = 30;
     int flagCount = mineNum;
-    int countTimer = 0;
+   // int countTimer = 0;
+   // SimpleTimer setTimer = new SimpleTimer();
+    Label flagLabel;
+   // Label timerLabel;
+    
+    int mineNum = 50;
+    private final int tileSize = 35;
+    private final int gridRow = 15;
+    private final int gridColl = 25;
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
     boolean gameOver = false;
-    SimpleTimer setTimer = new SimpleTimer();
-    Label flagLabel;
-    Label timerLabel;
-    
+    private int time = 0;
+    public void act()
+    {
+        time++;
+        if(time % 60 == 0)
+        {
+            showText("Time: " + (time / 60), 520, 20);    
+        }
+    }
     public MyWorld() {
         super(1000, 600, 1);
         flagLabel = new Label(flagCount,100);
-        timerLabel = new Label(countTimer,100);
+      //  timerLabel = new Label(countTimer,100);
         addObject(flagLabel, 950, 50);
-        addObject(timerLabel, 950, 150);
+       // addObject(timerLabel, 950, 150);
         
         for(int i = 0; i < gridRow; i++){
             for(int n = 0; n < gridColl; n++){
@@ -40,9 +49,9 @@ public class MyWorld extends World {
         }
         
     }
-    public void act(){
+    /*public void act(){
         changeTimer();
-    }
+    }*/
     public void loseGame()
     {
         for(int i = 0; i < gridRow; i++)
@@ -65,7 +74,7 @@ public class MyWorld extends World {
         /*
          * moves bomb if invalid spot
          */
-        setTimer.mark();
+       // setTimer.mark();
         for(int i = 0; i < mineNum; i++){
             int c = Greenfoot.getRandomNumber(gridColl);
             int r = Greenfoot.getRandomNumber(gridRow);
@@ -92,7 +101,11 @@ public class MyWorld extends World {
         }
         return false;
     }
-    
+    public void gameOver()
+    {
+        Label gameOverLabel = new Label("Game Over", 100);
+        addObject(gameOverLabel,300,200);
+    }
     /*
      * returns the amount of bombs surrounding
      */
@@ -129,7 +142,7 @@ public class MyWorld extends World {
         flagCount += add;
         flagLabel.setValue(flagCount);
     }
-    public void changeTimer(){
+   /* public void changeTimer(){
         
         if(setTimer.millisElapsed() < 1000){
             return;
@@ -137,5 +150,5 @@ public class MyWorld extends World {
         setTimer.mark();
         countTimer++;
         timerLabel.setValue(countTimer);
-    }
+    }*/
 }

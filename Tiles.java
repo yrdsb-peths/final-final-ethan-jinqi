@@ -13,7 +13,7 @@ public class Tiles extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     int num = 0;
-    int tileSize = 40;
+    int tileSize = 0;
     //GreenfootImage tiles = new GreenfootImage("tile_9.jpg");
     MouseInfo mouse = Greenfoot.getMouseInfo();
     int mouseX = -1;
@@ -92,6 +92,7 @@ public class Tiles extends Actor
                     
                     if (num == 11) {   // 💣 BOMB CLICKED
                         world.loseGame();
+                        world.gameOver();
                         return;
                     }
                     
