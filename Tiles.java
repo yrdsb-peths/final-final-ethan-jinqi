@@ -67,13 +67,16 @@ public class Tiles extends Actor
                  
                 if(!holdRight){
                     flag = !flag;
+                    if(flag){
+                        setImage(numTiles[10]);
+                        world.flagChange(-1);
+                    }else{
+                        setImage (numTiles[9]);
+                        world.flagChange(1);
+                    }
                 }
                 holdRight = true;
-                if(flag){
-                    setImage(numTiles[10]);
-                }else{
-                    setImage (numTiles[9]);
-                }
+                
             
             } else{
                 holdRight = false;
@@ -129,7 +132,7 @@ public class Tiles extends Actor
     }
     
     public void setTileSize(int size){
-        size = tileSize;
+        tileSize = size;
         for(int i = 0; i < numTiles.length; i++){
             numTiles[i] = new GreenfootImage("tile_" + i + ".jpg");
             numTiles[i].scale(tileSize, tileSize);

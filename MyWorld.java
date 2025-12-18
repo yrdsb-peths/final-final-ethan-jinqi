@@ -1,15 +1,25 @@
 import greenfoot.*;
 
 public class MyWorld extends World {
-    int mineNum = 50;
-    private final int tileSize = 40;
-    private final int gridRow = 15;
-    private final int gridColl = 25;
+    int mineNum = 99;
+    private final int tileSize = 30;
+    private final int gridRow = 16;
+    private final int gridColl = 30;
+    int flagCount = mineNum;
+    int countTimer = 0;
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
     boolean gameOver = false;
+    SimpleTimer setTimer = new SimpleTimer();
+    Label flagLabel;
+    Label timerLabel;
+    
     public MyWorld() {
         super(1000, 600, 1);
+        flagLabel = new Label(flagCount,100);
+        timerLabel = new Label(countTimer,100);
+        addObject(flagLabel, 950, 50);
+        addObject(timerLabel, 950, 150);
         
         for(int i = 0; i < gridRow; i++){
             for(int n = 0; n < gridColl; n++){
@@ -29,6 +39,9 @@ public class MyWorld extends World {
             }
         }
         
+    }
+    public void act(){
+        changeTimer();
     }
     public void loseGame()
     {
@@ -52,6 +65,7 @@ public class MyWorld extends World {
         /*
          * moves bomb if invalid spot
          */
+        setTimer.mark();
         for(int i = 0; i < mineNum; i++){
             int c = Greenfoot.getRandomNumber(gridColl);
             int r = Greenfoot.getRandomNumber(gridRow);
@@ -110,7 +124,18 @@ public class MyWorld extends World {
             }
         }
     }
-    public int tileSizeSend(){
-        return tileSize;
+
+    public void flagChange(int add){
+        flagCount += add;
+        flagLabel.setValue(flagCount);
+    }
+    public void changeTimer(){
+        
+        if(setTimer.millisElapsed() < 1000){
+            return;
+        }
+        setTimer.mark();
+        countTimer++;
+        timerLabel.setValue(countTimer);
     }
 }
