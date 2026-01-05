@@ -8,7 +8,7 @@ public class MyWorld extends World {
    // Label timerLabel;
     
     int mineNum = 99;
-     int tileSize = 1000 / 30;
+    int tileSize = 1000 / 30;
     private final int gridRow = 16;
     private final int gridColl = 50;
     int flagCount = mineNum;
@@ -17,12 +17,15 @@ public class MyWorld extends World {
     Label flagLabel;
     boolean gameOver = false;
     private int time = 0;
+    boolean firstClick = true;
     public void act()
     {
+        if(!firstClick){
         time++;
         if(time % 60 == 0)
-        {
-            showText("Time: " + (time / 60), 520, 20);    
+            {
+                showText("Time: " + (time / 60), 520, 20);    
+            }
         }
     }
     public MyWorld() {
@@ -84,6 +87,7 @@ public class MyWorld extends World {
          * moves bomb if invalid spot
          */
        // setTimer.mark();
+       firstClick = false;
         for(int i = 0; i < mineNum; i++){
             int c = Greenfoot.getRandomNumber(gridColl);
             int r = Greenfoot.getRandomNumber(gridRow);
