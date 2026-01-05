@@ -8,25 +8,34 @@ public class MyWorld extends World {
    // Label timerLabel;
     
     int mineNum = 99;
-    private final int tileSize = 1000 / 30;
+    int tileSize = 1000 / 30;
     private final int gridRow = 16;
-    private final int gridColl = 30;
+    private final int gridColl = 50;
     int flagCount = mineNum;
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
     Label flagLabel;
     boolean gameOver = false;
     private int time = 0;
+    boolean firstClick = true;
     public void act()
     {
+        if(!firstClick){
         time++;
         if(time % 60 == 0)
-        {
-            showText("Time: " + (time / 60), 520, 20);    
+            {
+                showText("Time: " + (time / 60), 520, 20);    
+            }
         }
     }
     public MyWorld() {
+        
         super(1000, 600, 1);
+        if(1000/gridColl < 500/gridRow){
+            tileSize = 1000/gridColl;
+        } else {
+            tileSize = 500/gridRow;
+        }
         flagLabel = new Label("flag: " + flagCount,50);
       //  timerLabel = new Label(countTimer,100);
         addObject(flagLabel, 700, 30);
@@ -46,7 +55,8 @@ public class MyWorld extends World {
                 tiles[i][n].setTileSize(tileSize);
                 //bombs[i][n] = createTiles(i, n);
                 tiles[i][n].location(i, n);
-                addObject (tiles[i][n], tileSize / 2 + tileSize * n,tileSize / 2 + tileSize * i + 600 - tileSize * gridRow);
+                addObject (tiles[i][n], tileSize / 2 + 500 - gridColl * tileSize / 2 + tileSize * n,
+                tileSize / 2 + tileSize * i + 100 + 250 - gridRow * tileSize/2 );
             }
         }
         
@@ -77,6 +87,7 @@ public class MyWorld extends World {
          * moves bomb if invalid spot
          */
        // setTimer.mark();
+       firstClick = false;
         for(int i = 0; i < mineNum; i++){
             int c = Greenfoot.getRandomNumber(gridColl);
             int r = Greenfoot.getRandomNumber(gridRow);
