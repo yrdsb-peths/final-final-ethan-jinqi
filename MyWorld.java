@@ -8,9 +8,9 @@ public class MyWorld extends World {
    // Label timerLabel;
     
     int mineNum = 99;
-    private final int tileSize = 1000 / 30;
+     int tileSize = 1000 / 30;
     private final int gridRow = 16;
-    private final int gridColl = 30;
+    private final int gridColl = 50;
     int flagCount = mineNum;
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
@@ -26,7 +26,13 @@ public class MyWorld extends World {
         }
     }
     public MyWorld() {
+        
         super(1000, 600, 1);
+        if(1000/gridColl < 500/gridRow){
+            tileSize = 1000/gridColl;
+        } else {
+            tileSize = 500/gridRow;
+        }
         flagLabel = new Label("flag: " + flagCount,50);
       //  timerLabel = new Label(countTimer,100);
         addObject(flagLabel, 700, 30);
@@ -46,7 +52,8 @@ public class MyWorld extends World {
                 tiles[i][n].setTileSize(tileSize);
                 //bombs[i][n] = createTiles(i, n);
                 tiles[i][n].location(i, n);
-                addObject (tiles[i][n], tileSize / 2 + tileSize * n,tileSize / 2 + tileSize * i + 600 - tileSize * gridRow);
+                addObject (tiles[i][n], tileSize / 2 + 500 - gridColl * tileSize / 2 + tileSize * n,
+                tileSize / 2 + tileSize * i + 100 + 250 - gridRow * tileSize/2 );
             }
         }
         
