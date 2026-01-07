@@ -6,7 +6,6 @@ public class MyWorld extends World {
    // SimpleTimer setTimer = new SimpleTimer();
     
    // Label timerLabel;
-    
     int mineNum = 99;
     int tileSize = 1000 / 30;
     private final int gridRow = 16;
