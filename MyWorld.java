@@ -8,8 +8,8 @@ public class MyWorld extends World {
    // Label timerLabel;
     int mineNum = 99;
     int tileSize = 1000 / 30;
-    private final int gridRow = 16;
-    private final int gridColl = 50;
+    private final int gridRow = 15;
+    private final int gridColl = 25;
     int flagCount = mineNum;
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
