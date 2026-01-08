@@ -31,6 +31,8 @@ public class MyWorld extends World {
     public MyWorld() {
         
         super(1000, 600, 1);
+         GreenfootImage background = new GreenfootImage("background.jpg");
+          setBackground(background);
         if(1000/gridColl < 500/gridRow){
             tileSize = 1000/gridColl;
         } else {
