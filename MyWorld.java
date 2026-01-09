@@ -9,8 +9,8 @@ public class MyWorld extends World {
     
     int mineNum = 99;
     int tileSize = 1000 / 30;
-    private final int gridRow = 15;
-    private final int gridColl = 25;
+    int gridRow = 15;
+   int gridColl = 25;
     int flagCount = mineNum;
     int[][] bombs = new int[gridRow][gridColl];
     Tiles[][] tiles = new Tiles[gridRow][gridColl];
@@ -30,7 +30,7 @@ public class MyWorld extends World {
     }
     public MyWorld() {
         
-        super(1000, 600, 1);
+        super(1000, 600, 1, false);
          GreenfootImage background = new GreenfootImage("background.jpg");
           setBackground(background);
         if(1000/gridColl < 500/gridRow){
