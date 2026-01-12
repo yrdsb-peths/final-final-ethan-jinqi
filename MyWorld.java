@@ -7,13 +7,13 @@ public class MyWorld extends World {
     
    // Label timerLabel;
     
-    int mineNum = 99;
-    int tileSize = 1000 / 30;
-    int gridRow = 15;
-   int gridColl = 25;
-    int flagCount = mineNum;
-    int[][] bombs = new int[gridRow][gridColl];
-    Tiles[][] tiles = new Tiles[gridRow][gridColl];
+    int mineNum;
+    int tileSize;
+    int gridRow;
+   int gridColl;
+    int flagCount;
+    int[][] bombs;
+    Tiles[][] tiles;
     Label flagLabel;
     boolean gameOver = false;
     private int time = 0;
@@ -33,6 +33,17 @@ public class MyWorld extends World {
         super(1000, 600, 1, false);
          GreenfootImage background = new GreenfootImage("background.jpg");
           setBackground(background);
+            
+        
+    }
+    
+    public void addTiles(int m, int r, int c){
+        mineNum = m;
+        gridRow = r;
+        gridColl = c;
+        flagCount = mineNum;
+        bombs = new int[gridRow][gridColl];
+        tiles = new Tiles[gridRow][gridColl];
         if(1000/gridColl < 500/gridRow){
             tileSize = 1000/gridColl;
         } else {
@@ -61,8 +72,8 @@ public class MyWorld extends World {
                 tileSize / 2 + tileSize * i + 100 + 250 - gridRow * tileSize/2 );
             }
         }
-        
     }
+    
     /*public void act(){
         changeTimer();
     }*/

@@ -24,15 +24,15 @@ public class SelectScreen extends World
     }
     
     public void prepare(){
-        int mineNum = 99;
-        int gridRow = 15;
-        int gridColl = 25;
+        mineNum = 99;
+        gridRow = 15;
+        gridColl = 25;
     }
     public void act(){
         if(Greenfoot.isKeyDown("space")){
             MyWorld gameWorld = new MyWorld();
             Greenfoot.setWorld(gameWorld);
-            
+            gameWorld.addTiles(mineNum, gridRow, gridColl);
         }
     }
     
