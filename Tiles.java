@@ -63,7 +63,7 @@ public class Tiles extends Actor
             mouseY >= getY() - tileSize / 2 && mouseY <= getY() + tileSize / 2 && mouseY > -1) {
 
             
-            if (Greenfoot.isKeyDown("right") && !uncovered){
+            if (Greenfoot.isKeyDown("right") && !uncovered && !firstClick){
                  
                 if(!holdRight){
                     flag = !flag;

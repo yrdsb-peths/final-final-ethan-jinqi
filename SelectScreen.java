@@ -20,6 +20,16 @@ public class SelectScreen extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        GreenfootImage background = new GreenfootImage("background.jpg");
+        setBackground(background);
+        Difficulty easy = new Difficulty(10, 9, 9, "easy");
+        addObject(easy, 150, 80);
+        Difficulty medium = new Difficulty(40, 16, 16, "medium");
+        addObject(medium, 300, 80);
+        Difficulty hard = new Difficulty(99, 16, 30, "hard");
+        addObject(hard, 450, 80);
+        Difficulty custom = new Difficulty(0, 0, 0, "custom");
+        addObject(custom, 300, 200);
         prepare();
     }
     
@@ -29,11 +39,7 @@ public class SelectScreen extends World
         gridColl = 25;
     }
     public void act(){
-        if(Greenfoot.isKeyDown("space")){
-            MyWorld gameWorld = new MyWorld();
-            Greenfoot.setWorld(gameWorld);
-            gameWorld.addTiles(mineNum, gridRow, gridColl);
-        }
+        
     }
     
     public int getMine(){
