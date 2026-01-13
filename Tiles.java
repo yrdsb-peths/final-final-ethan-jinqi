@@ -101,6 +101,7 @@ public class Tiles extends Actor
                     if (num == 0) {
                         world.callSurround(x, y);
                     }
+                    world.checkWin();
                     }
                 }
             }
