@@ -58,54 +58,41 @@ public class Tiles extends Actor
         
 
         
-        if(mouseX >= getX() - 20 && mouseX <= getX() + 20 && mouseX > -1 &&
-            mouseY >= getY() - 20 && mouseY <= getY() + 20 && mouseY > -1)
-        if(mouseX >= getX() - tileSize / 2 && mouseX <= getX() + tileSize / 2 && mouseX > -1 &&
-            mouseY >= getY() - tileSize / 2 && mouseY <= getY() + tileSize / 2 && mouseY > -1) {
-
-            
-            if (Greenfoot.isKeyDown("right") && !uncovered){
-                 
-                if(!holdRight){
-                    flag = !flag;
-                    if(flag){
-                        setImage(numTiles[10]);
-                        world.flagChange(-1);
-                    }else{
-                        setImage (numTiles[9]);
-                        world.flagChange(1);
-                    }
+        
+        if (Greenfoot.mouseClicked(this) && Greenfoot.getMouseInfo() != null) {
+            int button = Greenfoot.getMouseInfo().getButton();
+    
+            if (button == 3 && !uncovered && !firstClick) {
+                flag = !flag;
+                if (flag) {
+                    setImage(numTiles[10]);
+                    world.flagChange(-1);
+                } else {
+                    setImage(numTiles[9]);
+                    world.flagChange(1);
                 }
-                holdRight = true;
-                
-            
-            } else{
-                holdRight = false;
-                if (Greenfoot.isKeyDown("left") && !flag){
-                    
-                    if(firstClick){
-                    
+                return; // important: don't also process left-click logic this act
+            }
+    
+            // left click uncovers (once per click)
+            if (button == 1 && !flag) {
+                if (firstClick) {
                     world.createBombs(x, y);
-                    }else{
-                    
+                } else {
                     uncovered = true;
                     setImage(numTiles[num]);
-                    
-                    if (num == 11) {   // 💣 BOMB CLICKED
+    
+                    if (num == 11) {
                         world.loseGame();
                         world.gameOver();
                         bombSound.play();
                         return;
                     }
-                    
-                    if (num == 0) {
+                    if (num == 0){
                         world.callSurround(x, y);
-                    }
-                    world.checkWin();
                     }
                 }
             }
-            
         }
     }
     public void showBomb()
