@@ -12,6 +12,7 @@ public class Tiles extends Actor
      * Act - do whatever the Tiles wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    GreenfootSound bombSound = new GreenfootSound("explosion-fx-343683.mp3");
     int num = 0;
     int tileSize = 0;
     //GreenfootImage tiles = new GreenfootImage("tile_9.jpg");
@@ -84,6 +85,7 @@ public class Tiles extends Actor
                     if (num == 11) {
                         world.loseGame();
                         world.gameOver();
+                        bombSound.play();
                         return;
                     }
                     if (num == 0){
