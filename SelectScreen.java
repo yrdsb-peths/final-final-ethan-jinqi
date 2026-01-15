@@ -8,10 +8,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class SelectScreen extends World
 {
-    int mineNum = 0;
-    int gridRow = 0;
-    int gridColl = 0;
-
+    int mineNum = 10;
+    int gridRow = 9;
+    int gridColl = 9;
+    boolean chooseMode = false;
+    String mode = "easy";
+    Modify mines;
+    Label mNum;
+    Modify rows;
+    Label rNum;
+    Modify colls;
+    Label cNum;
+    
+    Difficulty custom;
+    Difficulty start;
     /**
      * Constructor for objects of class SelectScreen.
      * 
@@ -28,9 +38,22 @@ public class SelectScreen extends World
         addObject(medium, 300, 80);
         Difficulty hard = new Difficulty(99, 16, 30, "hard");
         addObject(hard, 450, 80);
-        Difficulty custom = new Difficulty(0, 0, 0, "custom");
-        addObject(custom, 300, 200);
-        prepare();
+        custom = new Difficulty("custom");
+        addObject(custom, 300, 150);
+        start = new Difficulty("start");
+        addObject(start, 300, 320);
+        
+        mines = new Modify();
+        mNum = new Label("0", 50);
+        
+        rows = new Modify();
+        rNum = new Label("0", 50);
+        
+        colls = new Modify();
+        cNum = new Label("0", 50);
+        
+        //prepare();
+
     }
     
     public void prepare(){
@@ -38,11 +61,56 @@ public class SelectScreen extends World
         gridRow = 15;
         gridColl = 25;
     }
+    
     public void act(){
+        mNum.setValue(mines.showNum());
+        rNum.setValue(rows.showNum());
+        cNum.setValue(colls.showNum());
         
+        custom.getCustom(mines.showNum(), rows.showNum(), colls.showNum());
+        if (mode.equals("custom")) {
+            mineNum = mines.showNum();
+            gridRow = rows.showNum();
+            gridColl = colls.showNum();
+        }
+        start.getCustom(mineNum, gridRow, gridColl);
+
+        
+        if(mode.equals("custom")){
+            addObject(mines, 150, 250);
+            addObject(rows, 300, 250);
+            addObject(colls, 450, 250);
+            
+            addObject(mNum, 150, 250);
+            addObject(rNum, 300, 250);
+            addObject(cNum, 450, 250);
+        } else {
+            removeObject(mines);
+            removeObject(rows);
+            removeObject(colls);
+            
+            removeObject(mNum);
+            removeObject(rNum);
+            removeObject(cNum);
+        }
     }
     
-    public int getMine(){
+    public int getCustom(){
         return mineNum;
+    }
+    
+    public void setMode(int M, int R, int C, String Mode){
+        mineNum = M;
+        gridRow = R;
+        gridColl = C;
+        mode = Mode;
+    }
+    
+    public boolean choose(){
+        return chooseMode;
+    }
+    
+    public String checkMode(){
+        return mode;
     }
 }
