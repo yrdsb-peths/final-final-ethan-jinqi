@@ -58,6 +58,12 @@ public class Difficulty extends Actor
                 if(mineNum >= gridRow * gridColl){
                     mineNum = gridRow * gridColl - 1;
                 }
+                if(gridRow < 2){
+                    gridRow = 2;
+                }
+                if(gridColl < 2){
+                    gridColl = 2;
+                }
                 gameWorld.addTiles(mineNum, gridRow, gridColl);
             } else {
                 //move(1);

@@ -55,10 +55,6 @@ public class Tiles extends Actor
         
         //MouseInfo mouse = Greenfoot.getMouseInfo();
         
-        
-
-        
-        
         if (Greenfoot.mouseClicked(this) && Greenfoot.getMouseInfo() != null) {
             int button = Greenfoot.getMouseInfo().getButton();
     
