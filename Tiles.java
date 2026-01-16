@@ -74,7 +74,7 @@ public class Tiles extends Actor
             if (button == 1 && !flag) {
                 if (firstClick) {
                     world.createBombs(x, y);
-                } else {
+                } 
                     uncovered = true;
                     setImage(numTiles[num]);
                     world.checkWin();
@@ -87,7 +87,7 @@ public class Tiles extends Actor
                     if (num == 0){
                         world.callSurround(x, y);
                     }
-                }
+                
             }
         }
     }
