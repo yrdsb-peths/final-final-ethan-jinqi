@@ -20,6 +20,7 @@ public class SelectScreen extends World
     Modify colls;
     Label cNum;
     
+    Label modeText;
     Difficulty custom;
     Difficulty start;
     /**
@@ -50,8 +51,9 @@ public class SelectScreen extends World
         rNum = new Label("0", 50);
         
         colls = new Modify();
-        cNum = new Label("0", 50);
+        cNum = new Label("0", 40);
         
+        modeText = new Label("Mines      Rows     Collumns", 50);
         //prepare();
 
     }
@@ -84,6 +86,8 @@ public class SelectScreen extends World
             addObject(mNum, 150, 250);
             addObject(rNum, 300, 250);
             addObject(cNum, 450, 250);
+            
+            addObject(modeText, 320, 200);
         } else {
             removeObject(mines);
             removeObject(rows);
@@ -92,6 +96,8 @@ public class SelectScreen extends World
             removeObject(mNum);
             removeObject(rNum);
             removeObject(cNum);
+            
+            removeObject(modeText);
         }
     }
     

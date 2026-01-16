@@ -77,7 +77,7 @@ public class Tiles extends Actor
                 } else {
                     uncovered = true;
                     setImage(numTiles[num]);
-    
+                    world.checkWin();
                     if (num == 11) {
                         world.loseGame();
                         world.gameOver();
@@ -126,5 +126,9 @@ public class Tiles extends Actor
         }
         
         setImage (numTiles[9]);
+    }
+    
+    public boolean isUncovered() { 
+        return uncovered; 
     }
 }

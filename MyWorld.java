@@ -137,22 +137,22 @@ public class MyWorld extends World {
     public void checkWin()
     {
         for (int i = 0; i < gridRow; i++) {
-        for (int n = 0; n < gridColl; n++) {
-            if (bombs[i][n] != 11 && !tiles[i][n].uncovered) {
-                return; // Not won yet
+            for (int n = 0; n < gridColl; n++) {
+                if (bombs[i][n] != 11 && !tiles[i][n].isUncovered()) {
+                    return; // Not won yet
+                }
             }
         }
+    
+        // If we reach here → all safe tiles uncovered
+        gameOver = true;
+    
+        int finalTime = time / 60; // seconds
+        Label winLabel = new Label("You Win! Time: " + finalTime + "s", 60);
+        addObject(winLabel, 500, 300);
+    
+        Greenfoot.stop();
     }
-
-    // If we reach here → all safe tiles uncovered
-    gameOver = true;
-
-    int finalTime = time / 60; // seconds
-    Label winLabel = new Label("You Win! Time: " + finalTime + "s", 60);
-    addObject(winLabel, 500, 300);
-
-    Greenfoot.stop();
-}
 
     
     /*
